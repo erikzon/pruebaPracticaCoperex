@@ -1,8 +1,13 @@
-﻿using System;
+﻿using pruebaPracticaCoperex.View;
+using pruebaPracticaCoperex.Model;
+using pruebaPracticaCoperex.Presenter;
+using pruebaPracticaCoperex._Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace pruebaPracticaCoperex
 {
@@ -16,7 +21,12 @@ namespace pruebaPracticaCoperex
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            string sqlConnectionString = ConfigurationManager.ConnectionStrings["sqlConnectionString"].ConnectionString;
+            IProductoView view = new ProductoView();
+            IProductoRepository repository = new ProductoRepository(sqlConnectionString);
+            new ProductoPresenter(view, repository);
+            Application.Run((Form)view);
         }
     }
 }

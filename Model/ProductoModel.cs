@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace pruebaPracticaCoperex.Model
 {
-    internal class ProductoModel
+    public class ProductoModel
     {
         private int _id;
         private string _nombre;
@@ -17,12 +17,18 @@ namespace pruebaPracticaCoperex.Model
         private double _precio;
 
         [DisplayName("ID Producto")]
-        public int Id { get => _id; set => _id = value; }
+        public int Id { 
+            get => _id; 
+            set => _id = value; 
+        }
 
         [DisplayName("Nombre Producto")]
         [Required(ErrorMessage = "El nombre del producto es obligatorio")]
         [StringLength(50,MinimumLength =1, ErrorMessage = "El nombre del producto debe ser entre 2 y 50 caracteres.")]
-        public string Nombre { get => _nombre; set => _nombre = value; }
+        public string Nombre { 
+            get => _nombre; 
+            set => _nombre = value; 
+        }
 
         [DisplayName("Descripcion Producto")]
         [Required(ErrorMessage = "La Descripcion del producto es obligatoria")]
@@ -35,10 +41,16 @@ namespace pruebaPracticaCoperex.Model
         [DisplayName("Stock Producto")]
         [Required(ErrorMessage = "La cantidad de stock es obligatorio.")]
         [Range(1, 999999, ErrorMessage = "El stock del producto debe tener de 1 a 6 cifras.")]
-        public int Stock { get => _stock; set => _stock = value; }
+        public int Stock { 
+            get => _stock; 
+            set => _stock = value; 
+        }
 
         [DisplayName("Precio del Producto")]
         [Required(ErrorMessage = "El precio del producto es obligatorio.")]
-        public double Precio { get => _precio; set => _precio = value; }
+        public double Precio { 
+            get => _precio; 
+            set => _precio = value;
+        }
     }
 }

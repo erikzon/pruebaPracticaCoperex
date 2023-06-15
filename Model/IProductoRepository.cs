@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace pruebaPracticaCoperex.Model
 {
-    internal interface IProductoModel
+    public interface IProductoRepository 
     {
         void Crear(ProductoModel productoModel);
         void Editar(ProductoModel productoModel);
         void Eliminar(int id);
 
-        IEnumerable<ProductoModel> GetAll();
-        IEnumerable<ProductoModel> GetByValue();
+        IEnumerable<ProductoModel> ObtenerTodos();
     }
 }

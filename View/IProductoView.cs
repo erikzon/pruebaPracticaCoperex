@@ -15,12 +15,10 @@ namespace pruebaPracticaCoperex.View
         string ProductoStock { get; set; }
         string ProductoPrecio { get; set; }
 
-        string Buscar { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccesful { get; set; }
         string Message { get; set; }
 
-        event EventHandler BusquedaEvento;
         event EventHandler AgregarProductoEvento;
         event EventHandler EditarProductoEvento;
         event EventHandler EliminarProductoEvento;
@@ -28,7 +26,8 @@ namespace pruebaPracticaCoperex.View
         event EventHandler CancelarEvento;
 
         void SetProductoListBindingSource(BindingSource productoList);
-        void Mostrar();
+        //void Mostrar();//Optional
+        void Show();//Optional
 
     }
 }
