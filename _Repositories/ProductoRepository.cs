@@ -18,17 +18,48 @@ namespace pruebaPracticaCoperex._Repositories
 
         public void Crear(ProductoModel productoModel)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "INSERT INTO Producto VALUES (@Nombre, @Descripcion, @Stock, @Precio);";
+                command.Parameters.Add("@Nombre", SqlDbType.NVarChar).Value = productoModel.Nombre;
+                command.Parameters.Add("@Descripcion", SqlDbType.NVarChar).Value = productoModel.Descripcion;
+                command.Parameters.Add("@Stock", SqlDbType.Int).Value = productoModel.Stock;
+                command.Parameters.Add("@Precio", SqlDbType.Float).Value = productoModel.Precio;
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Editar(ProductoModel productoModel)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = @"UPDATE Producto SET Nombre = @Nombre, Descripcion = @Descripcion, Stock = @Stock, Precio = @Precio WHERE Id=@Id";
+                command.Parameters.Add("@Nombre", SqlDbType.NVarChar).Value = productoModel.Nombre;
+                command.Parameters.Add("@Descripcion", SqlDbType.NVarChar).Value = productoModel.Descripcion;
+                command.Parameters.Add("@Stock", SqlDbType.Int).Value = productoModel.Stock;
+                command.Parameters.Add("@Precio", SqlDbType.Float).Value = productoModel.Precio;
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = productoModel.Id;
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Eliminar(int id)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "delete from Producto where Id = @Id";
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                command.ExecuteNonQuery();
+            }
         }
 
         public IEnumerable<ProductoModel> ObtenerTodos()

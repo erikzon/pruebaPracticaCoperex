@@ -51,6 +51,7 @@
     <Compile Include="Model\InventarioModel.cs" />
     <Compile Include="Model\IProductoRepository.cs" />
     <Compile Include="Model\ProductoModel.cs" />
+    <Compile Include="Presenter\Common\ModelDataValidation.cs" />
     <Compile Include="Presenter\ProductoPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

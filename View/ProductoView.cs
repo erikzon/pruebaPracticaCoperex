@@ -16,41 +16,54 @@ namespace pruebaPracticaCoperex.View
         public ProductoView()
         {
             InitializeComponent();
-            tabControl1.TabPages.Remove(tabPage2);
-        }       
+            AssociateAndRaiseViewEvents();
+            tabControl1.TabPages.Remove(tabPageCrud);
+        }
 
-        public string ProductoID {
-            get => ProductoID;
-            set => ProductoID = value; 
+        private void AssociateAndRaiseViewEvents()
+        {
+            buttonAgregar.Click += delegate { 
+                AgregarProductoEvento?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPageLectura);
+                tabControl1.TabPages.Add(tabPageCrud);
+            };
+            buttonEditar.Click += delegate { 
+                EditarProductoEvento?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPageLectura);
+                tabControl1.TabPages.Add(tabPageCrud);
+            };
+            buttonGuardarCambios.Click += delegate { 
+                GuardarEvento?.Invoke(this, EventArgs.Empty);
+                if (IsSuccesful)
+                {
+                    tabControl1.TabPages.Remove(tabPageCrud);
+                    tabControl1.TabPages.Add(tabPageLectura);
+                }
+                MessageBox.Show(Message);
+            };
+            btnCancelar.Click += delegate { 
+                CancelarEvento?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPageCrud);
+                tabControl1.TabPages.Add(tabPageLectura);
+            };
+            buttonEliminar.Click += delegate { 
+                var result = MessageBox.Show("Seguro que quieres eliminar este producto?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    EliminarProductoEvento?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(Message);
+                }
+            };
         }
-        public string ProductoNombre {
-            get => ProductoNombre;
-            set => ProductoNombre = value;
-        }
-        public string ProductoDescripcion {
-            get => ProductoDescripcion;
-            set => ProductoDescripcion = value;
-        }
-        public string ProductoStock {
-            get => ProductoStock;
-            set => ProductoStock = value;
-        }
-        public string ProductoPrecio { 
-            get => ProductoPrecio; 
-            set => ProductoPrecio = value; 
-        }
-        public bool IsEdit { 
-            get => IsEdit; 
-            set => IsEdit = value; 
-        }
-        public bool IsSuccesful {
-            get => IsSuccesful;
-            set => IsSuccesful = value;
-        }
-        public string Message {
-            get => Message;
-            set => Message = value;
-        }
+
+        public string ProductoID { get; set; }
+        public string ProductoNombre { get; set; }
+        public string ProductoDescripcion { get; set; }
+        public string ProductoStock { get; set; }
+        public string ProductoPrecio { get; set; }
+        public bool IsEdit { get; set; }
+        public bool IsSuccesful { get; set; }
+        public string Message { get; set; }
 
         public event EventHandler AgregarProductoEvento;
         public event EventHandler EditarProductoEvento;

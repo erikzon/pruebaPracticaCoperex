@@ -23,7 +23,7 @@ namespace pruebaPracticaCoperex.Presenter
             this.repository = repository;
 
             //eventos
-            this.view.AgregarProductoEvento += AgregarProducto;
+            this.view.AgregarProductoEvento += AgregarNuevoProducto;
             this.view.EditarProductoEvento += EditarProducto;
             this.view.EliminarProductoEvento += EliminarProducto;
             this.view.AgregarProductoEvento += AgregarNuevoProducto;
@@ -46,27 +46,81 @@ namespace pruebaPracticaCoperex.Presenter
 
         private void CancelarEvento(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LimpiarCuadrosTexto();
         }
 
         private void GuardarEvento(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var model = new ProductoModel();
+            model.Id = Convert.ToInt32(view.ProductoID);
+            model.Nombre = view.ProductoNombre.ToString();
+            model.Descripcion = view.ProductoDescripcion.ToString();
+            model.Precio = Convert.ToDouble(view.ProductoPrecio);
+            model.Stock = Convert.ToInt32(view.ProductoStock);
+
+            try
+            {
+                new Common.ModelDataValidation().Validate(model);
+                if (view.IsEdit)
+                {
+                    repository.Editar(model);
+                    view.Message = "Producto editado correctamente.";
+                } else
+                {
+                    repository.Crear(model);
+                    view.Message = "Producto creado correctamente.";
+                }
+                view.IsSuccesful = true;
+                CargarProductos();
+                LimpiarCuadrosTexto();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccesful = false;
+                view.Message = ex.Message;
+            }
+        }
+
+        private void LimpiarCuadrosTexto()
+        {
+            view.ProductoNombre = "";
+            view.ProductoID = "0";
+            view.ProductoDescripcion = "";
+            view.ProductoStock = "";
+            view.ProductoPrecio = "";
         }
 
         private void AgregarNuevoProducto(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            view.IsEdit = false;
         }
 
         private void EliminarProducto(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var producto = (ProductoModel)productoBindingSource.Current;
+                repository.Eliminar(producto.Id);
+                view.IsSuccesful = true;
+                view.Message = "Producto eliminado correctamente";
+                CargarProductos();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccesful= false;
+                view.Message = ex.Message;
+            }
         }
 
         private void EditarProducto(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var producto = (ProductoModel)productoBindingSource.Current;
+            view.ProductoNombre = producto.Nombre;
+            view.ProductoID = producto.Id.ToString();
+            view.ProductoDescripcion = producto.Descripcion;
+            view.ProductoStock= producto.Stock.ToString();
+            view.ProductoPrecio = producto.Precio.ToString();
+            view.IsEdit = true;
         }
 
         private void AgregarProducto(object sender, EventArgs e)
