@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace pruebaPracticaCoperex.Model
 {
-    internal class InventarioModel
+    public class InventarioModel
     {
         private int _id;
         private int _productoId;

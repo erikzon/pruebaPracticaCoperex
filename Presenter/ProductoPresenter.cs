@@ -24,9 +24,8 @@ namespace pruebaPracticaCoperex.Presenter
 
             //eventos
             this.view.AgregarProductoEvento += AgregarNuevoProducto;
-            this.view.EditarProductoEvento += EditarProducto;
+            this.view.EditarProductoEvento += PrepararEdit;
             this.view.EliminarProductoEvento += EliminarProducto;
-            this.view.AgregarProductoEvento += AgregarNuevoProducto;
             this.view.GuardarEvento += GuardarEvento;
             this.view.CancelarEvento += CancelarEvento;
 
@@ -112,7 +111,7 @@ namespace pruebaPracticaCoperex.Presenter
             }
         }
 
-        private void EditarProducto(object sender, EventArgs e)
+        private void PrepararEdit(object sender, EventArgs e)
         {
             var producto = (ProductoModel)productoBindingSource.Current;
             view.ProductoNombre = producto.Nombre;

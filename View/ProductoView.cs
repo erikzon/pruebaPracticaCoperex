@@ -17,34 +17,32 @@ namespace pruebaPracticaCoperex.View
         {
             InitializeComponent();
             AssociateAndRaiseViewEvents();
-            tabControl1.TabPages.Remove(tabPageCrud);
+            //tabControl1.TabPages.Remove(tabPageCrud);
         }
 
         private void AssociateAndRaiseViewEvents()
         {
             buttonAgregar.Click += delegate { 
                 AgregarProductoEvento?.Invoke(this, EventArgs.Empty);
-                tabControl1.TabPages.Remove(tabPageLectura);
-                tabControl1.TabPages.Add(tabPageCrud);
+                //tabControl1.TabPages.Remove(tabPageLectura);
+                //tabControl1.TabPages.Add(tabPageCrud);
+                tabControl1.SelectTab(1);
             };
             buttonEditar.Click += delegate { 
                 EditarProductoEvento?.Invoke(this, EventArgs.Empty);
-                tabControl1.TabPages.Remove(tabPageLectura);
-                tabControl1.TabPages.Add(tabPageCrud);
+                tabControl1.SelectTab(1);
             };
             buttonGuardarCambios.Click += delegate { 
                 GuardarEvento?.Invoke(this, EventArgs.Empty);
                 if (IsSuccesful)
                 {
-                    tabControl1.TabPages.Remove(tabPageCrud);
-                    tabControl1.TabPages.Add(tabPageLectura);
+                    tabControl1.SelectTab(0);
                 }
                 MessageBox.Show(Message);
             };
             btnCancelar.Click += delegate { 
                 CancelarEvento?.Invoke(this, EventArgs.Empty);
-                tabControl1.TabPages.Remove(tabPageCrud);
-                tabControl1.TabPages.Add(tabPageLectura);
+                tabControl1.SelectTab(0);
             };
             buttonEliminar.Click += delegate { 
                 var result = MessageBox.Show("Seguro que quieres eliminar este producto?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -57,10 +55,22 @@ namespace pruebaPracticaCoperex.View
         }
 
         public string ProductoID { get; set; }
-        public string ProductoNombre { get; set; }
-        public string ProductoDescripcion { get; set; }
-        public string ProductoStock { get; set; }
-        public string ProductoPrecio { get; set; }
+        public string ProductoNombre { 
+            get { return txtNombre.Text; }
+            set { txtNombre.Text = value; }
+        }
+        public string ProductoDescripcion {
+            get { return txtDescripcion.Text; }
+            set { txtDescripcion.Text = value; }
+        }
+        public string ProductoStock {
+            get { return txtStock.Text; }
+            set { txtStock.Text = value; }
+        }
+        public string ProductoPrecio {
+            get { return txtPrecio.Text; }
+            set { txtPrecio.Text = value; }
+        }
         public bool IsEdit { get; set; }
         public bool IsSuccesful { get; set; }
         public string Message { get; set; }
@@ -75,6 +85,16 @@ namespace pruebaPracticaCoperex.View
         public void SetProductoListBindingSource(BindingSource productoList)
         {
             dataGridView1.DataSource = productoList;
+        }
+
+        private void tabPageLectura_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAgregar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
