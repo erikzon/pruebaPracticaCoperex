@@ -63,6 +63,17 @@ INSERT INTO Inventario VALUES (10002, GETDATE(), 'Salida', 5);
 INSERT INTO Inventario VALUES (10003, GETDATE(), 'Salida', 15);
 INSERT INTO Inventario VALUES (10007, GETDATE(), 'Entrada', 20);
 
-select * from Inventario
+select * from Inventario order by Id desc;
 
-delete from Producto where Id = 10003
+SELECT 
+    i.FechaHora,
+    p.Nombre,
+    p.Descripcion,
+	CASE WHEN i.Movimiento = 'Entrada' THEN p.Stock - i.Cantidad ELSE p.Stock + i.Cantidad END AS [Inv. Inicial],
+	p.Precio AS [Costo Unitario],
+	CASE WHEN i.Movimiento = 'Entrada' THEN i.Cantidad ELSE 0 END AS Entrada,
+    CASE WHEN i.Movimiento = 'Salida' THEN i.Cantidad ELSE 0 END AS Salida,
+	p.Stock as [Inv. Final]
+FROM 
+    Inventario i
+    INNER JOIN Producto p ON i.ProductoId = p.Id;

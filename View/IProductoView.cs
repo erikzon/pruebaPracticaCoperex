@@ -24,6 +24,8 @@ namespace pruebaPracticaCoperex.View
         event EventHandler EliminarProductoEvento;
         event EventHandler GuardarEvento;
         event EventHandler CancelarEvento;
+        event EventHandler GenerarKardex;
+
 
         void SetProductoListBindingSource(BindingSource productoList);
         //void Mostrar();//Optional

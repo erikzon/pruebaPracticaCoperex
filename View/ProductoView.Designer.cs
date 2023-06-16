@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabPageKardex = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -55,11 +56,18 @@
             this.buttonAgregar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.coperexpruebaDataSet = new pruebaPracticaCoperex.coperexpruebaDataSet();
+            this.coperexpruebaDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productoTableAdapter = new pruebaPracticaCoperex.coperexpruebaDataSetTableAdapters.ProductoTableAdapter();
             this.tabPageKardex.SuspendLayout();
             this.tabPageCrud.SuspendLayout();
             this.tabPageLectura.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.coperexpruebaDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coperexpruebaDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPageKardex
@@ -99,11 +107,14 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DataSource = this.productoBindingSource;
+            this.comboBox1.DisplayMember = "Nombre";
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(180, 45);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(155, 21);
             this.comboBox1.TabIndex = 5;
+            this.comboBox1.ValueMember = "Id";
             // 
             // button2
             // 
@@ -113,6 +124,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "GENERAR KARDEX";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -122,6 +134,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Guardar movimiento";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label8
             // 
@@ -324,6 +337,25 @@
             this.tabControl1.Size = new System.Drawing.Size(567, 426);
             this.tabControl1.TabIndex = 0;
             // 
+            // coperexpruebaDataSet
+            // 
+            this.coperexpruebaDataSet.DataSetName = "coperexpruebaDataSet";
+            this.coperexpruebaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // coperexpruebaDataSetBindingSource
+            // 
+            this.coperexpruebaDataSetBindingSource.DataSource = this.coperexpruebaDataSet;
+            this.coperexpruebaDataSetBindingSource.Position = 0;
+            // 
+            // productoBindingSource
+            // 
+            this.productoBindingSource.DataMember = "Producto";
+            this.productoBindingSource.DataSource = this.coperexpruebaDataSetBindingSource;
+            // 
+            // productoTableAdapter
+            // 
+            this.productoTableAdapter.ClearBeforeFill = true;
+            // 
             // ProductoView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,6 +364,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "ProductoView";
             this.Text = "Productos";
+            this.Load += new System.EventHandler(this.ProductoView_Load);
             this.tabPageKardex.ResumeLayout(false);
             this.tabPageKardex.PerformLayout();
             this.tabPageCrud.ResumeLayout(false);
@@ -340,6 +373,9 @@
             this.tabPageLectura.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.coperexpruebaDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coperexpruebaDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -373,5 +409,9 @@
         private System.Windows.Forms.Button buttonAgregar;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.BindingSource coperexpruebaDataSetBindingSource;
+        private coperexpruebaDataSet coperexpruebaDataSet;
+        private System.Windows.Forms.BindingSource productoBindingSource;
+        private coperexpruebaDataSetTableAdapters.ProductoTableAdapter productoTableAdapter;
     }
 }

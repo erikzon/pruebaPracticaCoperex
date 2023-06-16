@@ -52,6 +52,21 @@ namespace pruebaPracticaCoperex.View
                     MessageBox.Show(Message);
                 }
             };
+
+            button2.Click += delegate
+            {
+                try
+                {
+                    GenerarKardex?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(@"Kardex Generado en el escritorio como: Kardex.xlsx");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Porfavor cierra el archivo de excel Kardex.xls e intenta nuevamente.");
+                    throw;
+                }
+                
+            };
         }
 
         public string ProductoID { get; set; }
@@ -80,6 +95,7 @@ namespace pruebaPracticaCoperex.View
         public event EventHandler EliminarProductoEvento; 
         public event EventHandler GuardarEvento;
         public event EventHandler CancelarEvento;
+        public event EventHandler GenerarKardex;
 
 
         public void SetProductoListBindingSource(BindingSource productoList)
@@ -93,6 +109,23 @@ namespace pruebaPracticaCoperex.View
         }
 
         private void buttonAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductoView_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'coperexpruebaDataSet.Producto' table. You can move, or remove it, as needed.
+            this.productoTableAdapter.Fill(this.coperexpruebaDataSet.Producto);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

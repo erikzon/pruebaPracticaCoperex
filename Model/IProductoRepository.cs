@@ -12,6 +12,8 @@ namespace pruebaPracticaCoperex.Model
         void Editar(ProductoModel productoModel);
         void Eliminar(int id);
 
+        void GenerarKardex();
+
         IEnumerable<ProductoModel> ObtenerTodos();
     }
 }

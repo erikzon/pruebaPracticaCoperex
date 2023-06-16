@@ -28,6 +28,7 @@ namespace pruebaPracticaCoperex.Presenter
             this.view.EliminarProductoEvento += EliminarProducto;
             this.view.GuardarEvento += GuardarEvento;
             this.view.CancelarEvento += CancelarEvento;
+            this.view.GenerarKardex += GenerarKardex;
 
             //binding source
             this.view.SetProductoListBindingSource(productoBindingSource);
@@ -35,6 +36,11 @@ namespace pruebaPracticaCoperex.Presenter
             CargarProductos();
             this.view.Show();
             //this.view.Mostrar();
+        }
+
+        private void GenerarKardex(object sender, EventArgs e)
+        {
+            repository.GenerarKardex();
         }
 
         private void CargarProductos()
